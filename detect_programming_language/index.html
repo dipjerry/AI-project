@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dynamic Game Tree</title>
+  <style>
+    .tree-node {
+      display: inline-block;
+      vertical-align: top;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin: 5px;
+    }
+    .tree-branch {
+      border-left: 1px solid #ccc;
+      height: 100%;
+      margin-left: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <label for="game-tree-input">Game Tree Data:</label>
+    <input type="text" id="game-tree-input">
+    <button onclick="generateGameTree()">Generate Game Tree</button>
+  </div>
+  <div id="game-tree-view"></div>
+
+  <script>
+    class Node {
+      constructor(value) {
+        this.value = value;
+        this.children = [];
+      }
+    }
+
+    function createGameTree(node, parentElement) {
+      var treeNode = document.createElement('div');
+      treeNode.className = 'tree-node';
+      treeNode.textContent = 'Node ' + node.value;
+
+      for (var i = 0; i < node.children.length; i++) {
+        var branch = document.createElement('div');
+        branch.className = 'tree-branch';
+
+        treeNode.appendChild(branch);
+        createGameTree(node.children[i], treeNode);
+      }
+
+      parentElement.appendChild(treeNode);
+    }
+
+    function generateGameTree() {
+      var input = document.getElementById('game-tree-input').value;
+
+      // Parse the input and create the game tree
+      var gameTreeData = JSON.parse(input);
+      var root = buildGameTree(gameTreeData);
+
+      // Generate the game tree view
+      var gameTreeView = document.getElementById('game-tree-view');
+      gameTreeView.innerHTML = '';
+      createGameTree(root, gameTreeView);
+    }
+
+    function buildGameTree(data) {
+      var root = new Node(data.value);
+
+      if (data.children && data.children.length > 0) {
+        for (var i = 0; i < data.children.length; i++) {
+          var child = buildGameTree(data.children[i]);
+          root.children.push(child);
+        }
+      }
+
+      return root;
+    }
+  </script>
+</body>
+</html>
