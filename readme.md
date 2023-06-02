@@ -43,6 +43,17 @@ The Alpha-Beta Pruning algorithm is a technique used in game trees to reduce the
 ### Usage
 
 The `alpha_beta` function in the provided code implements the Alpha-Beta Pruning algorithm. It takes a game tree node, depth, alpha, beta, and a boolean indicating whether it's the maximizing player's turn. The function returns the optimal value of the game tree.
+To use the Alpha-Beta Pruning algorithm:
+
+1. Create a game tree structure with nodes representing different game states.
+
+2. Set the initial alpha and beta values.
+
+3. Set the depth limit for the search.
+
+4. Call the `alpha_beta` function with the root node, depth limit, alpha, beta, and the maximizing player flag.
+
+5. The function will return the optimal value of the game tree.
 
 ## Dependencies
 
